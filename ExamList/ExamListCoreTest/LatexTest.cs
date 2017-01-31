@@ -22,7 +22,7 @@ namespace ExamListCoreTest
                 {
                     FirstName = "FirstName" + i,
                     LastName = "LastName" + i,
-                    StudentNumber = i + 1,
+                    StudentId = i + 1,
                 };
                 students.Add(student);
             }
@@ -33,12 +33,12 @@ namespace ExamListCoreTest
             distributor.AddRoom("Phil B", 100);
             distributor.Distribute();
 
-            string content = ExamConverter.ForExam(students);
+            string content = ExamConverter.PrintLatexStudentList(students);
             string[] lines = content.Split('\n');
             Assert.Equal(180+2+1, lines.Count());
             foreach (var line in lines)
             {
-                Assert.True(string.IsNullOrEmpty(line) || line.StartsWith("%") || line.StartsWith(@"\"));
+                Assert.True(string.IsNullOrEmpty(line) || line.StartsWith("%") || line.StartsWith(@"\matrikelnummer"));
             }
         }
     }

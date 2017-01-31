@@ -37,7 +37,7 @@ namespace ExamListCoreTest
             {
                 FirstName = "Jon",
                 LastName = "Doe",
-                StudentNumber = 123
+                StudentId = 123
             };
             student.SetSeat(_ROOM_A, 101);
             students.Add(student);
@@ -73,7 +73,7 @@ namespace ExamListCoreTest
                 {
                     FirstName = "FirstName" + i,
                     LastName = "LastName" + i,
-                    StudentNumber = i + 1
+                    StudentId = i + 1
                 });
             }
             dis.Students = students;

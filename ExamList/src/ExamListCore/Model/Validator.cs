@@ -8,6 +8,10 @@ namespace ExamListCore.Model
 {
     public static class Validator
     {
+        /// <summary>
+        /// Check if the students from a given list are distributed correctly to rooms
+        /// </summary>
+        /// <returns>True, if everything is alright</returns>
         public static bool IsValidRoomAllocation(List<Student> students)
         {
             //Get all rooms from the students
@@ -29,7 +33,7 @@ namespace ExamListCore.Model
             //Check if each student is valid and update the room information
             foreach (Student student in students)
             {
-                if (!student.IsValid())
+                if (student.StudentId <1)
                 {
                     return false;
                 }

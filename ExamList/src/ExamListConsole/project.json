@@ -3,9 +3,14 @@
   "buildOptions": {
     "emitEntryPoint": true
   },
-
+  "packOptions": {
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/jasdefer/ConsoleCommandHelper.git"
+    }
+  },
   "dependencies": {
-    "ExamListCore": {"target": "project"},
+    "ExamListCore": { "target": "project" },
     "Microsoft.NETCore.App": {
       "type": "platform",
       "version": "1.0.1"
