@@ -47,7 +47,7 @@ namespace ExamListCore
         /// <summary>
         /// Distribute the students to rooms in a random order. The first rooms will be filled first
         /// </summary>
-        public void Distribute()
+        public void Distribute(int seed)
         {
             //Validate all inputs
             if(Students == null || Students.Count < 1)
@@ -62,11 +62,11 @@ namespace ExamListCore
 
             if(Students.Count > Rooms.Sum(x => x.Capacity))
             {
-                throw new InvalidOperationException("Capacity exceeded");
+                throw new InvalidOperationException($"Capacity exceeded. {Students.Count} students.");
             }
 
 
-            Random rnd = new Random();
+            Random rnd = new Random(seed);
             //Give an index to each student
             List<int> indicies = Enumerable.Range(0, Students.Count).ToList();
             foreach (Room room in Rooms)
@@ -81,11 +81,6 @@ namespace ExamListCore
                     indicies.Remove(index);
                 }
             }
-        }
-
-        public void PrintLatexCode()
-        {
-
         }
     }
 }

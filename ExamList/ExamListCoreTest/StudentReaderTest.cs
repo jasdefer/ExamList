@@ -79,7 +79,6 @@ namespace ExamListCoreTest
         [InlineData("1;1;Some Name;Degree")]
         [InlineData("1;1;Some Name")]
         [InlineData("1;1")]
-        [InlineData("1;1;Some Name;Degree;Context;100%")]
         [InlineData("1;1;Some Name;;Context;100%")]
         [InlineData("1;;Some Name;Degree;Context;100%")]
         [InlineData("1;-1;Some Name;Degree;Context;100%")]

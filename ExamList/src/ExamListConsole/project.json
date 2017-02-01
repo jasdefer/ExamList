@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "buildOptions": {
     "emitEntryPoint": true
@@ -10,6 +10,7 @@
     }
   },
   "dependencies": {
+    "ConsoleCommandHelperCore": "1.0.0-*",
     "ExamListCore": { "target": "project" },
     "Microsoft.NETCore.App": {
       "type": "platform",

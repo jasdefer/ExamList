@@ -31,7 +31,7 @@ namespace ExamListCoreTest
             distributor.Students = students;
             distributor.AddRoom("Phil A", 100);
             distributor.AddRoom("Phil B", 100);
-            distributor.Distribute();
+            distributor.Distribute(1);
 
             string content = ExamConverter.PrintLatexStudentList(students);
             string[] lines = content.Split('\n');

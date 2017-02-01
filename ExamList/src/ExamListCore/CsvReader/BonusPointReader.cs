@@ -52,7 +52,7 @@ namespace ExamListCore.CsvReader
             {
                 string[] args = line.Split(separator);
                 //Find the student by email, because the first argument of the bonus point file always contains the email address
-                Student student = students.SingleOrDefault(x => x.Email == args[0]);
+                Student student = students.SingleOrDefault(x => !string.IsNullOrEmpty(x.Email) && x.Email.ToLowerInvariant() == args[0].ToLowerInvariant());
                 PointReader(student, args);
             }
         }
@@ -63,17 +63,36 @@ namespace ExamListCore.CsvReader
         /// <param name="args">The arguments coming from a csv file for the given student.</param>
         public void ReadPoints(Student student, string[] args)
         {
+            
             //Validate the input
             if (args.Length != 2)
             {
                 throw new Exception($"Cannot interprete {string.Join(";", args)} for bonus points.");
             }
-            decimal percentage = decimal.Parse(args[1]);
-            //Get the maximum level which is not greater than the given percentage
-            decimal maxKey = BonusPointsLevels.Where(x => x.Key >= percentage).Max(x => x.Key);
-            //Assign the corresponding value
-            student.BonusPoints = BonusPointsLevels[maxKey];
-        }
+            //Validate the email
+            if (!args[0].Contains("@"))
+            {
+                throw new Exception("Invalid email in bonus points: " + args[0]);
+            }
 
+            //Check if the student is enrolled for the exam
+            if (student == null)
+            {
+                Console.WriteLine($"{args[0]} has bonus points but is not enrolled for the exam");
+            }
+            else
+            {
+
+                decimal percentage = decimal.Parse(args[1]);
+                if (percentage < 0 || percentage > 1)
+                {
+                    throw new ArgumentException("Invalid percentage: " + percentage);
+                }
+                //Get the maximum level which is not greater than the given percentage
+                decimal maxKey = BonusPointsLevels.Where(x => x.Key <= percentage).Max(x => x.Key);
+                //Assign the corresponding value
+                student.BonusPoints = BonusPointsLevels[maxKey];
+            }
+        }
     }
 }

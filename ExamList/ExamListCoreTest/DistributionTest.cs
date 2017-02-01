@@ -78,7 +78,7 @@ namespace ExamListCoreTest
             }
             dis.Students = students;
             //Distribute the students to the rooms
-            dis.Distribute();
+            dis.Distribute(1);
 
             return students;
         }

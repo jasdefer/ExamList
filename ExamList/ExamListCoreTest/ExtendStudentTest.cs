@@ -50,8 +50,8 @@ namespace ExamListCoreTest
         }
 
         [Theory]
-        [InlineData("1;1;LastName;FirstName;Degree;a;mail@gmail.com;c;d;e")]
-        [InlineData("1;1;Doe;Jon;Degree;a;mail@gmail.com;c;d;e")]
+        [InlineData("1;1;LastName;FirstName;Degree;a;mail@gmail.com;c;d;e;f")]
+        [InlineData("1;1;Doe;Jon;Degree;a;mail@gmail.com;c;d;e;f")]
         public void ExtendFromExtendedTest(string line)
         {
             string[] args = line.Split(';');
@@ -64,7 +64,7 @@ namespace ExamListCoreTest
 
         [Theory]
         [InlineData("1;1;Doe;Jon;Degree;a;mail@gmail.com;c;d")]
-        [InlineData("1;1;Doe;Jon;Degree;a;mail@gmail.com;c;d;e;")]
+        [InlineData("1;1;Doe;Jon;Degree;a;mail@gmail.com;c;d;e;f;")]
         [InlineData("1;2;Doe;Jon;Degree;a;mail@gmail.com;c;d;e")]
         [InlineData("1;0;Doe;Jon;Degree;a;mail@gmail.com;c;d;e")]
         [InlineData("1;;Doe;Jon;Degree;a;mail@gmail.com;c;d;e")]

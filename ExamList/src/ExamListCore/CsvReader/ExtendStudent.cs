@@ -22,6 +22,9 @@ namespace ExamListCore.CsvReader
         /// <param name="separator">The character which separates the arguments in a line of the csv file.</param>
         private static void AddInformation(string path, List<Student> students, Action<Student,string[]> Extender, char separator = '\t')
         {
+            //Check which students have been extended
+            List<int> studentIds = students.Select(x => x.StudentId).ToList();
+
             //Read all lines from the csv file
             foreach (var line in File.ReadLines(path))
             {
@@ -30,18 +33,33 @@ namespace ExamListCore.CsvReader
                 int studentId = int.Parse(args[1]);
                 Student student = students.SingleOrDefault(x => x.StudentId == studentId);
 
-                //Check if the student is found
-                if (student == null)
-                {
-                    //Student was registered in the exam but not in the course. Leave his detailed information blank and notify the user
-                    Console.WriteLine($"Student {student.StudentId} not found in {Path.GetFileName(path)}.");
-                }
-                else
+                //Check if the student from the course is registered to the exam
+                if (student != null)
                 {
                     //Add the detailed information to the student
                     Extender(student, args);
+                    studentIds.Remove(studentId);
+                }
+                else
+                {
+                    Console.WriteLine("Bonus Points, but not enrolled for the exam: " + studentId);
                 }
             }
+
+            //Some students may be enrolled for an exam without beeing registered for the course
+            if (studentIds.Count > 0)
+            {
+                Console.WriteLine($"Did not find information about {studentIds.Count} student in the course file. Following student ids:");
+                foreach (var item in studentIds)
+                {
+                    Console.WriteLine("" + item);
+                }
+            }
+        }
+
+        public static void ExtendFromDefaultList(object _ExtendStudentsPath, List<Student> students, char _Separator)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -80,7 +98,7 @@ namespace ExamListCore.CsvReader
             //Validate the input
             if (args.Length != 5)
             {
-                throw new ArgumentException("Unexpected number of arguments in line");
+                throw new ArgumentException("Unexpected number of arguments in line of the default course list. Expected 5 found "+args.Length);
             }
 
             if (student.StudentId != int.Parse(args[1]))
@@ -92,7 +110,7 @@ namespace ExamListCore.CsvReader
             student.LastName = args[2];
             student.FirstName = args[3];
 
-            if(string.IsNullOrEmpty(student.LastName) || string.IsNullOrEmpty(student.LastName))
+            if(string.IsNullOrEmpty(student.FirstName) || string.IsNullOrEmpty(student.LastName))
             {
                 throw new ArgumentException("No first name or last name found");
             }
@@ -105,11 +123,20 @@ namespace ExamListCore.CsvReader
         /// <param name="args">The arguments of the matching line for the given student from the extended STiNE course csv file.</param>
         public static void ExtendFromExtendedList(Student student, string[] args)
         {
+            if (student == null)
+            {
+                throw new ArgumentNullException("student");
+            }
+            if(args.Length != 11)
+            {
+                throw new ArgumentException("Unexpected number of arguments in line of the extended course list. Expected 11 found " + args.Length);
+            }
             //Validate the input
             if (student.StudentId != int.Parse(args[1]))
             {
                 throw new Exception($"Given line does not match the student {string.Join(";", args)}");
             }
+
 
             //Assign the input
 
@@ -117,6 +144,11 @@ namespace ExamListCore.CsvReader
             if (string.IsNullOrEmpty(student.DegreeCourse))
             {
                 student.DegreeCourse = args[4];
+                //Check if the no degree course was given at all
+                if (string.IsNullOrEmpty(student.DegreeCourse))
+                {
+                    throw new ArgumentException($"Degree Course not defined for student id {student.StudentId}");
+                }
             }
             else if (student.DegreeCourse != args[4])
             {
@@ -126,7 +158,10 @@ namespace ExamListCore.CsvReader
             //Assign the name
             student.LastName = args[2];
             student.FirstName = args[3];
-
+            if(string.IsNullOrEmpty(student.LastName) || string.IsNullOrEmpty(student.FirstName))
+            {
+                throw new ArgumentException("No first name or last name found");
+            }
             //Assign the email address and validate it
             student.Email = args[6];
             if (string.IsNullOrEmpty(student.Email) || !student.Email.Contains("@"))

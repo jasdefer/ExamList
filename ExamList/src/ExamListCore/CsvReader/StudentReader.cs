@@ -62,7 +62,7 @@ namespace ExamListCore.CsvReader
             //Validate the input
             if (args.Length != 3)
             {
-                throw new ArgumentException("Unexpected number of arguments in line");
+                throw new ArgumentException("Unexpected number of arguments in line of the devault exam list. Expected 3 found "+args.Length);
             }
 
             //Assign the input
@@ -86,7 +86,7 @@ namespace ExamListCore.CsvReader
             //Validate the input
             if (args.Length != 6)
             {
-                throw new ArgumentException("Unexpected number of arguments in line");
+                throw new ArgumentException("Unexpected number of arguments in line of the extend exam list. Expected 6 found "+args.Length);
             }
 
             //Assign the input
