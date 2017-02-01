@@ -42,7 +42,7 @@ namespace ExamListCore.CsvReader
                 }
                 else
                 {
-                    Console.WriteLine("Bonus Points, but not enrolled for the exam: " + studentId);
+                    Console.WriteLine("Member of the course, but not enrolled for the exam: " + studentId);
                 }
             }
 
@@ -55,11 +55,6 @@ namespace ExamListCore.CsvReader
                     Console.WriteLine("" + item);
                 }
             }
-        }
-
-        public static void ExtendFromDefaultList(object _ExtendStudentsPath, List<Student> students, char _Separator)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -96,9 +91,9 @@ namespace ExamListCore.CsvReader
         {
 
             //Validate the input
-            if (args.Length != 5)
+            if (args.Length != 7)
             {
-                throw new ArgumentException("Unexpected number of arguments in line of the default course list. Expected 5 found "+args.Length);
+                throw new ArgumentException("Unexpected number of arguments in line of the default course list. Expected 7 found "+args.Length);
             }
 
             if (student.StudentId != int.Parse(args[1]))
