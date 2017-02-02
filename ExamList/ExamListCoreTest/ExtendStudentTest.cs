@@ -12,8 +12,8 @@ namespace ExamListCoreTest
     public class ExtendStudentTest
     {
         [Theory]
-        [InlineData("1;1;LastName;FirstName;1")]
-        [InlineData("1;1;Doe;Jon;1")]
+        [InlineData("1;1;LastName;FirstName;1;;")]
+        [InlineData("1;1;Doe;Jon;1;;")]
         public void ExtendFromDefaultListTest(string line)
         {
             string[] args = line.Split(';');
@@ -24,6 +24,7 @@ namespace ExamListCoreTest
         }
 
         [Theory]
+        [InlineData("1;1;LastName;FirstName;1;;;")]
         [InlineData("1;2;FirstName;LastName;1")]
         [InlineData("1;;FirstName;LastName;1")]
         [InlineData("1;0;FirstName;LastName;1")]

@@ -81,6 +81,7 @@ namespace ExamListCore
                     indicies.Remove(index);
                 }
             }
+            Students = Students.OrderBy(x => x.Room).OrderBy(x => x.Seat).ToList();
         }
     }
 }

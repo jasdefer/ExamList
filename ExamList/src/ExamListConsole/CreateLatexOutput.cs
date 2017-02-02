@@ -37,13 +37,13 @@ namespace ExamListConsole
         {
             Assignments = new List<Assignment>();
             Statements = new List<Statement>();
-            Statements.Add(new Statement("examdetail",SetDetailedExamList, "Read the students from the detailed exam list, rather than the default exam list"));
-            Statements.Add(new Statement("ex", ExtendStudents, "Extend the list of students with information from the course list"));
-            Statements.Add(new Statement("extenddetail", ExtendFromDetailed, "for extending the student information use the detailed instead of the default course list."));
+            Statements.Add(new Statement("detailedexam",SetDetailedExamList, "Read the students from the detailed exam list, rather than the default exam list"));
+            Statements.Add(new Statement("readcourse", ExtendStudents, "Extend the list of students with information from the course list"));
+            Statements.Add(new Statement("detailcourse", ExtendFromDetailed, "for extending the student information use the detailed instead of the default course list."));
 
             Assignments.Add(new Assignment("separator", SetSeparator, "Set the separator of all input and output files."));
             Assignments.Add(new Assignment("exampath", SetExamListPath, "Enter the path to the list of students enrolled for the exam", true));
-            Assignments.Add(new Assignment("extendpath", SetExtendPath, "Enter the path to course file."));
+            Assignments.Add(new Assignment("coursepath", SetExtendPath, "Enter the path to course file."));
             Assignments.Add(new Assignment("bonuspath", SetBonusPath, "Enter the path to the bonus points"));
             Assignments.Add(new Assignment("output", SetOutputPath, "Enter the output path", true));
             Assignments.Add(new Assignment("seed", SetSeed, "Enter a seed for the randomness used in the student distribution"));
@@ -285,7 +285,7 @@ namespace ExamListConsole
 
 
             //print the output
-            string output = ExamConverter.PrintLatexStudentList(students);
+            string output = ExamConverter.PrintLatexStudentList(distributor.Students);
             File.WriteAllText(_OutputPath, output);
         }
 
