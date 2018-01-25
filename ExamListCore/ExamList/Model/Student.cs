@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ExamListCore.Model
+﻿namespace ExamList.Model
 {
     public class Student
     {
@@ -17,12 +11,10 @@ namespace ExamListCore.Model
         public int Seat { get; private set; }
         public Room Room { get; private set; }
 
-
         public void SetSeat(Room room, int seat)
         {
             Room = room;
             Seat = seat;
         }
-
     }
 }
