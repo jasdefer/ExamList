@@ -59,18 +59,25 @@ namespace ExamList.Implementations
         /// <summary>
         /// Calculates the amount of bonus points for a given fraction of points in the Klausurtrainer
         /// </summary>
+        //private decimal FractionToBonusPoints(decimal fraction)
+        //{
+        //    if (fraction < 0.15m) return 0;
+        //    else if (fraction < 0.25m) return 0.5m;
+        //    else if (fraction < 0.35m) return 1m;
+        //    else if (fraction < 0.45m) return 1.5m;
+        //    else if (fraction < 0.55m) return 2m;
+        //    else if (fraction < 0.65m) return 2.5m;
+        //    else if (fraction < 0.75m) return 3m;
+        //    else if (fraction < 0.85m) return 3.5m;
+        //    else if (fraction < 0.95m) return 4m;
+        //    else return 4.5m;
+        //}
         private decimal FractionToBonusPoints(decimal fraction)
         {
-            if (fraction < 0.15m) return 0;
-            else if (fraction < 0.25m) return 0.5m;
-            else if (fraction < 0.35m) return 1m;
-            else if (fraction < 0.45m) return 1.5m;
-            else if (fraction < 0.55m) return 2m;
-            else if (fraction < 0.65m) return 2.5m;
-            else if (fraction < 0.75m) return 3m;
-            else if (fraction < 0.85m) return 3.5m;
-            else if (fraction < 0.95m) return 4m;
-            else return 4.5m;
+            if (fraction < 0.25m) return 0;
+            else if (fraction < 0.5m) return 1m;
+            else if (fraction < 0.75m) return 2m;
+            else return 3m;
         }
     }
 }

@@ -37,7 +37,10 @@ namespace ExamList.Implementations
                 {
                     string[] args = line.Split('\t');
                     Room room = new Room(args[0], Convert.ToInt32(args[1]));
-                    room.Offset = Convert.ToInt32(args[2]);
+                    if (args.Length == 3)
+                    {
+                        room.Offset = Convert.ToInt32(args[2]);
+                    }
                     rooms.Add(room);
                     _Logger.LogInformation("Added Room " + room.ToString());
                 }
