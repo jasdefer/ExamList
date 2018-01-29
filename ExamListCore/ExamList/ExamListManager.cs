@@ -58,7 +58,7 @@ namespace ExamList
                 Room room = rooms.ElementAt(index);
                 student.SetSeat(room, counter+1+room.Offset);
                 counter++;
-                if(counter >= room.Capacity-1)
+                if(counter > room.Capacity-1)
                 {
                     index++;
                     counter = 0;
