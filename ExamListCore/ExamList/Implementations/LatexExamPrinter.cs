@@ -1,5 +1,6 @@
 ﻿using ExamList.Interfaces;
 using ExamList.Model;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,10 +16,12 @@ namespace ExamList.Implementations
     public class LatexExamPrinter : IExamListPrinter
     {
         private readonly string _OutputPath;
+        private readonly ILogger<LatexExamPrinter> _Logger;
 
-        public LatexExamPrinter(string outputPath)
+        public LatexExamPrinter(string outputPath, ILogger<LatexExamPrinter> logger)
         {
             _OutputPath = outputPath ?? throw new ArgumentNullException(nameof(outputPath));
+            _Logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public void Print(IEnumerable<Student> students)
@@ -31,9 +34,14 @@ namespace ExamList.Implementations
 
             //Build file content
             StringBuilder sb = new StringBuilder();
-            foreach (Room room in students.Select(s => s.Room).Distinct())
+            foreach (Room room in students.Select(s => s.Room)
+                .OrderBy(r => r.Name)
+                .Distinct())
             {
-                foreach (Student student in students.Where(s => s.Room == room))
+                sb.AppendLine("%"+room.Name);
+                foreach (Student student in students
+                    .OrderBy(s => s.Seat)
+                    .Where(s => s.Room == room))
                 {
                     sb.AppendLine($@"\matrikelnummer{{{student.StudentId}}}{{{student.Room.Name}}}{{{student.Seat}}}{{{student.LastName}}}{{{student.FirstName}}}{{{student.BonusPoints}}}{{{student.DegreeCourse}}}");
                 }
@@ -41,6 +49,7 @@ namespace ExamList.Implementations
             
             //Write file
             File.WriteAllText(_OutputPath, sb.ToString());
+            _Logger.LogInformation("Completed printing the file to " + _OutputPath);
         }
     }
 }

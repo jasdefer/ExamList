@@ -61,15 +61,15 @@ namespace ExamList.Implementations
         /// </summary>
         private decimal FractionToBonusPoints(decimal fraction)
         {
-            if (fraction < 0.1m) return 0;
-            else if (fraction < 0.2m) return 0.5m;
-            else if (fraction < 0.3m) return 1m;
-            else if (fraction < 0.4m) return 1.5m;
-            else if (fraction < 0.5m) return 2m;
-            else if (fraction < 0.6m) return 2.5m;
-            else if (fraction < 0.7m) return 3m;
-            else if (fraction < 0.8m) return 3.5m;
-            else if (fraction < 0.9m) return 4m;
+            if (fraction < 0.15m) return 0;
+            else if (fraction < 0.25m) return 0.5m;
+            else if (fraction < 0.35m) return 1m;
+            else if (fraction < 0.45m) return 1.5m;
+            else if (fraction < 0.55m) return 2m;
+            else if (fraction < 0.65m) return 2.5m;
+            else if (fraction < 0.75m) return 3m;
+            else if (fraction < 0.85m) return 3.5m;
+            else if (fraction < 0.95m) return 4m;
             else return 4.5m;
         }
     }

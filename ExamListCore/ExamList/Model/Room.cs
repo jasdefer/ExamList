@@ -9,6 +9,7 @@
         }
         public string Name { get; set; }
         public int Capacity { get; set; }
+        public int Offset { get; set; }
 
         public override string ToString()
         {

@@ -48,7 +48,8 @@ namespace ExamListConsole
                 p.GetService<ILogger<KlausurtrainerReader>>()));
 
             serviceCollection.AddTransient<IExamListPrinter>(
-                p => new LatexExamPrinter(configuration["Paths:Output"]));
+                p => new LatexExamPrinter(configuration["Paths:Output"],
+                p.GetService<ILogger<LatexExamPrinter>>()));
 
             serviceCollection.AddTransient<IStudentReader>(
                 p => new StineStudentReader(configuration["Paths:ExamParticipants"],
