@@ -37,23 +37,25 @@ namespace ExamListConsole
             // Add access to generic IConfigurationRoot
             serviceCollection.AddSingleton(configuration);
 
+            string course = configuration["CourseName"];
+
             serviceCollection.AddTransient<IExamListTask, ExamListExecutor>();
 
             serviceCollection.AddTransient<IRoomReader>(
-                p => new DefaultRoomReader(configuration["Paths:Room"],
+                p => new DefaultRoomReader(configuration[$"{course}:Room"],
                 p.GetService<ILogger<DefaultRoomReader>>()));
 
             serviceCollection.AddTransient<IBonusPointReader>(
-                p => new KlausurtrainerReader(configuration["Paths:KlausurtrainerPoints"],
+                p => new KlausurtrainerReader(configuration[$"{course}:KlausurtrainerPoints"],
                 p.GetService<ILogger<KlausurtrainerReader>>()));
 
             serviceCollection.AddTransient<IExamListPrinter>(
-                p => new LatexExamPrinter(configuration["Paths:Output"],
+                p => new LatexExamPrinter(configuration[$"{course}:Output"],
                 p.GetService<ILogger<LatexExamPrinter>>()));
 
             serviceCollection.AddTransient<IStudentReader>(
-                p => new StineStudentReader(configuration["Paths:ExamParticipants"],
-                configuration["Paths:CourseParticipants"],
+                p => new StineStudentReader(configuration[$"{course}:ExamParticipants"],
+                configuration[$"{course}:CourseParticipants"],
                 p.GetService<ILogger<StineStudentReader>>()));
 
             serviceCollection.AddTransient<ExamListManager>();
