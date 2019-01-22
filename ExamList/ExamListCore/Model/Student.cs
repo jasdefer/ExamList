@@ -7,7 +7,7 @@
         public string LastName { get; set; }
         public string Email { get; set; }
         public string DegreeCourse { get; set; }
-        public decimal BonusPoints { get; set; }
+        public double BonusPoints { get; set; }
         public int Seat { get; private set; }
         public Room Room { get; private set; }
 

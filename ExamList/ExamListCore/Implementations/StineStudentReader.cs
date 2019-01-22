@@ -69,7 +69,7 @@ namespace ExamListCore.Implementations
                             student.FirstName = args[3];
                             student.LastName = args[2];
                             student.DegreeCourse = args[4];
-                            student.Email = args[6];
+                            student.Email = args[6].ToLowerInvariant();
                         }
                     }
                 }
