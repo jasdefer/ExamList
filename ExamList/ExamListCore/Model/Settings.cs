@@ -9,5 +9,7 @@
         public string BonusPointPath { get; set; }
         public double[,] BonusPointLevels { get; set; }
         public double MaxBonusPoints { get; set; }
+        public string LatexPath { get; set; }
+        public int GroupCount { get; set; }
     }
 }
