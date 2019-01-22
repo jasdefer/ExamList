@@ -39,7 +39,7 @@ namespace ExamListCore
             {
                 bonusPointReader.ReadBonusPoints(students);
             }
-            studentDistribution.Distribute(students, rooms);
+            students = studentDistribution.Distribute(students, rooms);
             examListPrinter.Print(students);
         }
     }

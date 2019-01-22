@@ -5,6 +5,6 @@ namespace ExamListCore.Interfaces
 {
     public interface IStudentDistribution
     {
-        void Distribute(IEnumerable<Student> students, IEnumerable<Room> rooms);
+        IEnumerable<Student> Distribute(IEnumerable<Student> students, IEnumerable<Room> rooms);
     }
 }
