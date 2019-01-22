@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace ExamListCore.Implementations
 {
@@ -44,7 +45,41 @@ namespace ExamListCore.Implementations
 
         private void ReadCourseList(List<Student> students)
         {
-            var text = File.ReadAllText(settings.CourseListPath);
+            var text = File.ReadAllLines(settings.CourseListPath);
+
+            for (int i = 0; i < text.Length; i++)
+            {
+                var args = text[i].Split('\t');
+                if (args.Length != 8)
+                {
+                    logger.LogWarning("Invalid student course list line: " + text[i]);
+                }
+                else
+                {
+                    bool success = int.TryParse(args[1], out int id);
+                    if (!success)
+                    {
+                        logger.LogWarning($"Invalid student id '{args[1]}' in the line {text[i]}");
+                    }
+                    else
+                    {
+                        var student = students.SingleOrDefault(x => x.StudentId == id);
+                        if(student != null)
+                        {
+                            student.FirstName = args[3];
+                            student.LastName = args[2];
+                            student.DegreeCourse = args[4];
+                            student.Email = args[6];
+                        }
+                    }
+                }
+            }
+
+            var notMatched = students.Count(x => string.IsNullOrEmpty(x.FirstName) ||
+                string.IsNullOrEmpty(x.LastName) ||
+                string.IsNullOrEmpty(x.DegreeCourse) ||
+                string.IsNullOrEmpty(x.Email));
+            logger.LogInformation($"Found {text.Length} students registered for the course. Did not find details for {notMatched} students.");
         }
 
         private List<Student> ReadExamList()
