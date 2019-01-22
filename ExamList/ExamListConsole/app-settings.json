@@ -1,0 +1,13 @@
+{
+  "ReadBonusPoints": true,
+  "ExamListPath": "",
+  "CourseListPath": "",
+  "RoomListPath": "",
+  "BonusPointPath": "",
+  "MaxBonusPoints": 100,
+  "LatexPath": "",
+  "GroupCount": 2,
+  "RandomSeed": 10,
+  "BonusPointLevels": [ 0.25, 0.5, 0.75 ],
+  "BonusPoints": [1,2,3]
+}

@@ -1,6 +1,7 @@
 ﻿using ExamListCore.Interfaces;
 using ExamListCore.Model;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace ExamListCore
 {
@@ -14,8 +15,8 @@ namespace ExamListCore
         private readonly IExamListPrinter examListPrinter;
         private readonly IStudentDistribution studentDistribution;
 
-        public ExamListManager(ILogger logger,
-            Settings settings,
+        public ExamListManager(ILogger<ExamListManager> logger,
+            IOptions<Settings> options,
             IStudentReader studentReader,
             IRoomReader roomReader,
             IBonusPointReader bonusPointReader,
@@ -23,7 +24,7 @@ namespace ExamListCore
             IStudentDistribution studentDistribution)
         {
             this.logger = logger;
-            this.settings = settings;
+            this.settings = options.Value;
             this.studentReader = studentReader;
             this.roomReader = roomReader;
             this.bonusPointReader = bonusPointReader;

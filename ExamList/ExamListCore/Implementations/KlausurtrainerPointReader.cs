@@ -63,21 +63,21 @@ namespace ExamListCore.Implementations
 
         private void ValidateBonusPointLevels()
         {
-            if (settings.BonusPointLevels.GetLength(0) != 2)
+            if (settings.BonusPointLevels.Length != settings.BonusPoints.Length)
             {
-                logger.LogWarning("Invalid bonus point levels.");
+                logger.LogWarning("Not as many bonus point leves as bonus points provided.");
             }
-            for (int i = 0; i < settings.BonusPointLevels.GetLength(1); i++)
+            for (int i = 0; i < settings.BonusPointLevels.Length; i++)
             {
-                var level = settings.BonusPointLevels[0, i];
-                var points = settings.BonusPointLevels[1, i];
+                var level = settings.BonusPointLevels[i];
+                var points = settings.BonusPointLevels[i];
                 if (level < 0 || level > 1) logger.LogWarning("The bonus point level is not between 0 and 100%.");
-                if (i > 0 && level < settings.BonusPointLevels[0, i - 1])
+                if (i > 0 && level < settings.BonusPointLevels[i - 1])
                 {
                     logger.LogWarning("The bonus point level is not increasing.");
                 }
 
-                if (i > 0 && points < settings.BonusPointLevels[1, i - 1])
+                if (i > 0 && points < settings.BonusPoints[i - 1])
                 {
                     logger.LogWarning("The bonus points are not increasing.");
                 }
@@ -91,9 +91,10 @@ namespace ExamListCore.Implementations
             double bonus = 0;
             for (int i = 0; i < settings.BonusPointLevels.GetLongLength(1); i++)
             {
-                var level = settings.BonusPointLevels[0, i];
-                var points = settings.BonusPointLevels[1, i];
-                if (fraction >= level) bonus = points;
+                if (fraction >= settings.BonusPointLevels[i])
+                {
+                    bonus = settings.BonusPoints[i];
+                }
             }
             return bonus;
         }
