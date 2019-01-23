@@ -1,4 +1,4 @@
-﻿using ExamListCore.Interfaces;
+using ExamListCore.Interfaces;
 using ExamListCore.Model;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -26,17 +26,19 @@ namespace ExamListCore.Implementations
             var rnd = new Random(settings.RandomSeed);
             var sortedStudents = students.OrderBy(x => rnd.Next()).ToArray();
             int index = 0;
-            int seat = 0;
+            
             foreach (var room in rooms)
             {
-                while (seat <= room.Capacity)
+                int seat = 0;
+                while (seat <= room.Capacity && index<sortedStudents.Length)
                 {
                     sortedStudents[index].SetSeat(room, seat);
                     seat++;
+                    index++;
                 }
             }
 
-            return sortedStudents.OrderBy(x => x.Seat).OrderBy(x => x.Room);
+            return sortedStudents.OrderBy(x => x.Seat).OrderBy(x => x.Room.Name).ToArray();
         }
     }
 }
