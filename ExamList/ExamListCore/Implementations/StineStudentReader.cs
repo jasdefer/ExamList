@@ -50,7 +50,7 @@ namespace ExamListCore.Implementations
             for (int i = 0; i < text.Length; i++)
             {
                 var args = text[i].Split('\t');
-                if (args.Length != 8)
+                if (args.Length != 10)
                 {
                     logger.LogWarning("Invalid student course list line: " + text[i]);
                 }

@@ -37,7 +37,7 @@ namespace ExamListCore.Implementations
                     {
                         var args = lines[i + 1].Split('\t');
                         bool success = int.TryParse(args[0], out int klausurtrainerPoints);
-                        if (!success)
+                        if (success)
                         {
                             student.BonusPoints = GetBonusPoints(klausurtrainerPoints);
                             matchCount++;
@@ -70,7 +70,7 @@ namespace ExamListCore.Implementations
             for (int i = 0; i < settings.BonusPointLevels.Length; i++)
             {
                 var level = settings.BonusPointLevels[i];
-                var points = settings.BonusPointLevels[i];
+                var points = settings.BonusPoints[i];
                 if (level < 0 || level > 1) logger.LogWarning("The bonus point level is not between 0 and 100%.");
                 if (i > 0 && level < settings.BonusPointLevels[i - 1])
                 {
@@ -89,7 +89,7 @@ namespace ExamListCore.Implementations
             klausurtrainerPoints = Math.Min(klausurtrainerPoints, settings.MaxBonusPoints);
             var fraction = klausurtrainerPoints / settings.MaxBonusPoints;
             double bonus = 0;
-            for (int i = 0; i < settings.BonusPointLevels.GetLongLength(1); i++)
+            for (int i = 0; i < settings.BonusPointLevels.Length; i++)
             {
                 if (fraction >= settings.BonusPointLevels[i])
                 {
