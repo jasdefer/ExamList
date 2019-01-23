@@ -74,12 +74,16 @@ namespace ExamListCore.Implementations
                     }
                 }
             }
+            logger.LogInformation($"Found {text.Length} students registered for the course.");
 
             var notMatched = students.Count(x => string.IsNullOrEmpty(x.FirstName) ||
                 string.IsNullOrEmpty(x.LastName) ||
                 string.IsNullOrEmpty(x.DegreeCourse) ||
                 string.IsNullOrEmpty(x.Email));
-            logger.LogInformation($"Found {text.Length} students registered for the course. Did not find details for {notMatched} students.");
+            if (notMatched > 0)
+            {
+                logger.LogWarning($"Did not find details for {notMatched} students.");
+            }
         }
 
         private List<Student> ReadExamList()

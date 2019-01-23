@@ -32,7 +32,7 @@ namespace ExamListCore.Implementations
             }
 
             var dir = Path.GetDirectoryName(settings.LatexPath);
-            if (!Directory.Exists(settings.LatexPath))
+            if (!Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
                 logger.LogInformation("Latex output directory not found. It was created.");
@@ -45,7 +45,7 @@ namespace ExamListCore.Implementations
                 group++;
                 if (group > settings.GroupCount) group = 1;
             }
-            
+            File.WriteAllText(settings.LatexPath, sb.ToString());
         }
     }
 }

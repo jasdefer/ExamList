@@ -37,8 +37,12 @@ namespace ExamListCore.Implementations
                     index++;
                 }
             }
+            if (rooms.Sum(x => x.Capacity) < sortedStudents.Length)
+            {
+                logger.LogError($"Capacity of the rooms ({rooms.Sum(x => x.Capacity)}) is not enough for {sortedStudents.Length} students.");
+            }
 
-            return sortedStudents.OrderBy(x => x.Seat).OrderBy(x => x.Room.Name).ToArray();
+            return sortedStudents.OrderBy(x => x.Seat).OrderBy(x => x.Room?.Name).ToArray();
         }
     }
 }
