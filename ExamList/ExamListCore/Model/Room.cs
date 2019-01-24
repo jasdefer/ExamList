@@ -1,15 +1,18 @@
-﻿namespace ExamList.Model
+﻿using System;
+
+namespace ExamListCore.Model
 {
     public class Room
     {
         public Room(string name, int capacity)
         {
-            Name = name ?? throw new System.ArgumentNullException(nameof(name));
+            Name = name ?? throw new ArgumentNullException(nameof(name));
+            if (capacity < 1) throw new ArgumentOutOfRangeException(nameof(capacity));
             Capacity = capacity;
         }
+
         public string Name { get; set; }
         public int Capacity { get; set; }
-        public int Offset { get; set; }
 
         public override string ToString()
         {

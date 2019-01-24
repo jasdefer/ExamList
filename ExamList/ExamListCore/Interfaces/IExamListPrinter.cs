@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using ExamList.Model;
+using ExamListCore.Model;
 
-namespace ExamList.Interfaces
+namespace ExamListCore.Interfaces
 {
     public interface IExamListPrinter
     {
