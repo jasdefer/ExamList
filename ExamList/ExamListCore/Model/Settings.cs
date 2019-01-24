@@ -13,5 +13,6 @@
         public string LatexPath { get; set; }
         public int GroupCount { get; set; }
         public int RandomSeed { get; set; }
+        public string AssignedStudentRooms { get; set; }
     }
 }
