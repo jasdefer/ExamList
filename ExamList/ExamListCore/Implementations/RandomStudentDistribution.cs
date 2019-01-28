@@ -32,7 +32,7 @@ namespace ExamListCore.Implementations
             
             foreach (var room in rooms)
             {
-                while (roomSeats[room] <= room.Capacity && index<sortedStudents.Length)
+                while (roomSeats[room] < room.Capacity && index<sortedStudents.Length)
                 {
                     if (sortedStudents[index].Room == null)
                     {
