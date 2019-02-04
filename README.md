@@ -7,9 +7,10 @@ The file should look like:
   "ReadBonusPoints": true,
   "ExamListPath": "C:\\Users\\..\\ExamListPath.txt",
   "CourseListPath": "C:\\Users\\..\\CourseListPath.txt",
-  "RoomListPath": "C:\\Users\\..\\CourseListPath.txt",
-  "BonusPointPath": "C:\\Users\\..\\CourseListPath.txt",
-  "AssignedStudentRooms": "C:\\Users\\..\\CourseListPath.txt",
+  "RoomListPath": "C:\\Users\\..\\RoomListPath.txt",
+  "BonusPointPath": "C:\\Users\\..\\BonusPointPath.txt",
+  "AssignedStudentRooms": "C:\\Users\\..\\AssignedStudentRoomsPath.txt",
+  "SeatTablePath": "C:\\Users\\..\\SeatTablePath.txt",
   "MaxBonusPoints": 100,
   "LatexPath": "C:\\Users\\..\\CourseListPath.txt",
   "GroupCount": 2,
@@ -25,9 +26,10 @@ The file should look like:
 4. RoomListPath: Path to the file with the list of rooms
 5. BonusPointPath: Path to the file with the Klausurtrainer Points of the students
 6. AssignedStudentRooms: Path to the file with a list of students, which are placed in certain rooms, instead of randomly assignments
-7. MaxBonusPoints: Maximum amount of bonus points
-8. LatexPath: Path to the file for the output
-9. GroupCount: Number of groups for the exam
-10. RandomSeed: Seed for randomizing the student room distribution
-11. BonusPointLevels: Percentage levels where students get bonus points
-12. BonusPoints: The amount of bonus points for each corresponding bonus point level
+7. SeatTablePath: Path to the file with a 
+8. MaxBonusPoints: Maximum amount of bonus points
+9. LatexPath: Path to the file for the output
+10. GroupCount: Number of groups for the exam
+11. RandomSeed: Seed for randomizing the student room distribution
+12. BonusPointLevels: Percentage levels where students get bonus points
+13. BonusPoints: The amount of bonus points for each corresponding bonus point level
