@@ -1,5 +1,6 @@
 ﻿using ExamListCore;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace ExamListConsole
 {
@@ -19,6 +20,8 @@ namespace ExamListConsole
         {
             logger.LogInformation("Welcome to the exam list manager.");
             examListManager.DistributeStudents();
+            logger.LogInformation("End of program.");
+            Console.ReadLine();
         }
     }
 }
