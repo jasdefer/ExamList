@@ -5,7 +5,7 @@
     <Description></Description>
     <PackageProjectUrl>https://github.com/jasdefer/ExamList</PackageProjectUrl>
     <Authors>Justus Bonz</Authors>
-    <Version>0.2.0</Version>
+    <Version>0.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>

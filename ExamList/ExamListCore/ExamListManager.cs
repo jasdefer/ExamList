@@ -14,6 +14,7 @@ namespace ExamListCore
         private readonly IBonusPointReader bonusPointReader;
         private readonly IExamListPrinter examListPrinter;
         private readonly IStudentDistribution studentDistribution;
+        private readonly IRoomListPrinter roomListPrinter;
 
         public ExamListManager(ILogger<ExamListManager> logger,
             IOptions<Settings> options,
@@ -21,7 +22,8 @@ namespace ExamListCore
             IRoomReader roomReader,
             IBonusPointReader bonusPointReader,
             IExamListPrinter examListPrinter,
-            IStudentDistribution studentDistribution)
+            IStudentDistribution studentDistribution,
+            IRoomListPrinter roomListPrinter)
         {
             this.logger = logger;
             this.settings = options.Value;
@@ -30,6 +32,7 @@ namespace ExamListCore
             this.bonusPointReader = bonusPointReader;
             this.examListPrinter = examListPrinter;
             this.studentDistribution = studentDistribution;
+            this.roomListPrinter = roomListPrinter;
         }
 
         public void DistributeStudents()
@@ -42,6 +45,7 @@ namespace ExamListCore
             }
             students = studentDistribution.Distribute(students, rooms);
             examListPrinter.Print(students);
+            roomListPrinter.Print(students);
         }
     }
 }

@@ -88,32 +88,24 @@ namespace ExamListCore.Implementations
 
         private List<Student> ReadExamList()
         {
-            var text = File.ReadAllLines(settings.ExamListPath);
+            var lines = File.ReadAllLines(settings.ExamListPath);
             var students = new List<Student>();
 
-            if (text.Length < 2)
+            if (lines.Length < 1)
             {
                 logger.LogWarning("No students found.");
                 return students;
             }
-            for (int i = 1; i < text.Length; i++)
+            for (int i = 0; i < lines.Length; i++)
             {
-                var args = text[i].Split(';');
-                if (args.Length < 1)
+                bool success = int.TryParse(lines[i], out int id);
+                if (!success)
                 {
-                    logger.LogWarning("Invalid exam list line: " + text[i]);
+                    logger.LogWarning($"Cannot read the student id '{lines[i]}' from line {i}={lines[i]}");
                 }
                 else
                 {
-                    bool success = int.TryParse(args[1].Replace("\"", ""), out int id);
-                    if (!success)
-                    {
-                        logger.LogWarning($"Cannot read the student id '{args[1]}' from line {i}={text[i]}");
-                    }
-                    else
-                    {
-                        students.Add(new Student(id));
-                    }
+                    students.Add(new Student(id));
                 }
             }
 

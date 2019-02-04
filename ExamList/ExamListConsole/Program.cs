@@ -45,6 +45,7 @@ namespace ExamListConsole
             serviceCollection.AddTransient<IRoomReader, RoomReader>();
             serviceCollection.AddTransient<IStudentDistribution, RandomStudentDistribution>();
             serviceCollection.AddTransient<IStudentReader, StineStudentReader>();
+            serviceCollection.AddTransient<IRoomListPrinter, DefaultRoomListPrinter>();
             serviceCollection.AddTransient<ExamListManager>();
 
             // add app
