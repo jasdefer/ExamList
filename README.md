@@ -26,9 +26,9 @@ The file should look like:
 4. RoomListPath: Path to the file with the list of rooms
 5. BonusPointPath: Path to the file with the Klausurtrainer Points of the students
 6. AssignedStudentRooms: Path to the file with a list of students, which are placed in certain rooms, instead of randomly assignments
-7. SeatTablePath: Path to the file with a 
+7. SeatTablePath: This file will be created and contains a list with the seat numbers and the room for each student
 8. MaxBonusPoints: Maximum amount of bonus points
-9. LatexPath: Path to the file for the output
+9. LatexPath: This file will be created and can be used for a latex template
 10. GroupCount: Number of groups for the exam
 11. RandomSeed: Seed for randomizing the student room distribution
 12. BonusPointLevels: Percentage levels where students get bonus points
